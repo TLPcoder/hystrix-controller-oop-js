@@ -8,12 +8,12 @@ var someFunc = () => {
 var config = [{
     name: 'testing',
     requestModel: someFunc,
-    errorThreshold: 10,
-    timeout: 10000,
-    requestVolumeThreshold: 10,
-    sleepWindowInMilliseconds: 1000,
-    statisticalWindowLength: 10000,
-    statisticalWindowNumberOfBuckets: 10000,
+    // errorThreshold: 10,
+    // timeout: 10000,
+    // requestVolumeThreshold: 10,
+    // sleepWindowInMilliseconds: 1000,
+    // statisticalWindowLength: 10000,
+    // statisticalWindowNumberOfBuckets: 10000,
     checkServiceHealthTime: 1000,
     errorHandler: () => console.log('error handler'),
     fallbackTo: (err, args) => console.log('fallback function', err)
