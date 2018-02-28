@@ -1,5 +1,5 @@
 {
-  "name": "hystrix-controlller",
+  "name": "hystrix-controller",
   "version": "1.0.0",
   "description": "library built on top of the hystrixjs library",
   "main": "index.js",
