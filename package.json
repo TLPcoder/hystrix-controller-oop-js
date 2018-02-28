@@ -1,12 +1,16 @@
 {
-  "name": "hystrix-tlp",
+  "name": "hystrix-controlller",
   "version": "1.0.0",
   "description": "library built on top of the hystrixjs library",
   "main": "index.js",
+  "keywords": ["Hystrix", "Hystrixjs"],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Trevor Pellegrini",
+  "author": {
+    "name": "Trevor Pellegrini",
+    "email": "trevorpellegrini@gmail.com"
+  },
   "license": "ISC",
   "dependencies": {
     "ensure-array": "^1.0.0",
