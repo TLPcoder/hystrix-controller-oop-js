@@ -10,6 +10,24 @@ To create hystrix wrappers
     setConfig(config).createWrappers();
 ```
 
+Config must be an array of configeration for each hystrix wrapper
+example:
+```javascipt
+    const config = [{
+        name: 'wapper',
+        requestModel: requestFunc,
+        errorThreshold: 10,
+        timeout: 10000,
+        requestVolumeThreshold: 10,
+        sleepWindowInMilliseconds: 1000,
+        statisticalWindowLength: 10000,
+        statisticalWindowNumberOfBuckets: 10000,
+        checkServiceHealthTime: 1000,
+        errorHandler: errorHandlerFunc,
+        fallbackTo: hystrixFallbackFunc
+    }]
+````
+
 Methods avaliable:
 
 createWrappers: Creates and saves all your hystrix wrappers using the Config passed to HystrixController 
