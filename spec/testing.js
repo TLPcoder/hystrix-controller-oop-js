@@ -107,5 +107,7 @@ const newConfig = [{
 
 const hystrixTesting = HystrixController(config)
 hystrixTesting.createCommands()
+console.log('reste cache bro', hystrixTesting.resetCache('metrics'))
 console.log(hystrixTesting.controller({services: ['testing1', 'testing2'], circuitStatus: 'open'}))
 console.log(hystrixTesting.circuitHealth())
+console.log(hystrixTesting.hystrixjs())
