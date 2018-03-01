@@ -105,16 +105,7 @@ const newConfig = [{
     fallbackTo: (err, args) => console.log('fallback function', err)
 }]
 
-const hystrixTesting = new HystrixController(config)
-
-Promise.resolve(hystrixTesting.createCommands())
-    .then(() => hystrixTesting.controller({services: ['testing1', 'testing2'], circuitStatus: 'open'}))
-    .then((data) => console.log('databro:', data))
-    .then(() => console.log(hystrixTesting.serviceCommands))
-    .then(() => hystrixTesting.controller({services: ['testing1'], circuitStatus: 'reset'}))
-    .then((data) => console.log('databro:', data))
-    .then(() => console.log(hystrixTesting.serviceCommands))
-    .then(() => hystrixTesting.controller({services: ['testing2'], circuitStatus: 'close'}))
-    .then((data) => console.log('databro:', data))
-    .then(() => console.log(hystrixTesting.serviceCommands))
-    .catch(err => console.log(err))
+const hystrixTesting = HystrixController(config)
+hystrixTesting.createCommands()
+console.log(hystrixTesting.controller({services: ['testing1', 'testing2'], circuitStatus: 'open'}))
+console.log(hystrixTesting.circuitHealth())

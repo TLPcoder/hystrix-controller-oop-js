@@ -60,18 +60,111 @@ timeout for request
 
 ## Methods avaliable: ##
 
-createCommands: Creates and saves all your hystrix commands using the Config passed to HystrixController 
+createCommands: Creates and saves all your hystrix commands using the Config passed to HystrixController
+ ```javascipt
+    const HystrixController = require('hystrix-controller')
+    const Config = require('./hystrix-config')
+
+    HystrixController(Config).createCommands()
+ ```
 
 getConfig: returns the current config
+ 
+ ```javascipt
+    const HystrixController = require('hystrix-controller')
 
-getServiceCommands: returns hystrix serviceCommands to be used in your application
+    HystrixController().getConfig()
+    <!-- returns [{
+        name: 'command',
+        requestModel: requestFunc,
+        errorThreshold: 10,
+        timeout: 10000,
+        requestVolumeThreshold: 10,
+        sleepWindowInMilliseconds: 1000,
+        statisticalWindowLength: 10000,
+        statisticalWindowNumberOfBuckets: 10000,
+        checkServiceHealthTime: 1000,
+        errorHandler: errorHandlerFunc,
+        fallbackTo: hystrixFallbackFunc
+    }] -->
+ ```
+
+getServiceCommands: returns hystrix serviceCommands to be used in your application 
+
+ ```javascipt
+    const HystrixController = require('hystrix-controller')
+
+    const { getUser } = HystrixController().getServiceCommands()
+
+    getUser.execute(request)
+        .then((user) => {
+            return user
+        })
+ ```
 
 updateHystrix: Let the developer update the config and serviceCommands with a new config Array
 
+ ```javascipt
+    const HystrixController = require('hystrix-controller')
+
+    const { getUser } = HystrixController().getServiceCommands()
+
+    getUser.execute(request)
+        .then((user) => {
+            return user
+        })
+ ```
+
 circuitHealth: Will return an Array of all your hystrix circuits and their health status. Either open or closed
+
+ ```javascipt
+    const HystrixController = require('hystrix-controller')
+
+    const circuitHealth = HystrixController().circuitHealth()
+    
+    <!-- [ { name: 'getUser', circuitStatus: 'closed' }, { name: 'getFriends', circuitStatus: 'opened' } ] -->
+ ```
 
 getCircuitStatus: Will return status of passed in circuit "Name" status will be either open or closed
 
-controller: Allows developer to open, close, or reset circuits or a circuit.
+ ```javascipt
+    const HystrixController = require('hystrix-controller')
 
-TO BE CONTINUED
+    const circuitHealth = HystrixController().getCircuitStatus('getUser')
+    
+    <!-- 'closed' -->
+ ```
+
+controller: Allows developer to open, close, or reset circuit or circuits. 
+
+The controller method takes an Object as an argument with two nodes "services" which needs to be an array with the services the developer wishes to change the circuit status. This will be the name of service from the config the developer is using. "All" is also an option if the developer wishes to effect all circuits. 
+
+The second node "circuitStatus" is the status the developer want to set the service/services circuit to: open, close, reset. Open forces the circuit open, close force the circuit closed, and reset rebuilds the command with the most current config.
+
+
+ ```javascipt
+    const HystrixController = require('hystrix-controller')
+
+    HystrixController().controller({services: ['getUser'], circuitStatus: 'open'})
+    <!-- 'getUser circuit has been opened' -->
+    
+    HystrixController().getCircuitStatus('getUser') 
+
+    <!-- 'opened' -->
+
+    HystrixController().controller({services: ['getUser'], circuitStatus: 'reset'})
+
+     <!-- 'closed' -->
+
+    HystrixController().controller({services: ['all'], circuitStatus: 'open'})
+     <!-- 'getUser, getFriends circuit has been opened' -->
+
+    HystrixController().circuitHealth()
+
+    <!-- [ { name: 'getUser', circuitStatus: 'opened' }, { name: 'getFriends', circuitStatus: 'opened' } ] -->
+
+    HystrixController().controller({services: ['all'], circuitStatus: 'reset'})
+
+    <!-- [ { name: 'getUser', circuitStatus: 'closed' }, { name: 'getFriends', circuitStatus: 'closed' } ] -->
+     
+ ```
