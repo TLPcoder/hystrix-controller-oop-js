@@ -60,8 +60,7 @@ timeout for request
 
 ## Methods avaliable: ##
 
-#### createCommands: #### 
-Creates and saves all your hystrix commands using the Config passed to HystrixController
+**createCommands:** Creates and saves all your hystrix commands using the Config passed to HystrixController
  ```javascipt
     const HystrixController = require('hystrix-controller')
     const Config = require('./hystrix-config')
@@ -69,8 +68,7 @@ Creates and saves all your hystrix commands using the Config passed to HystrixCo
     HystrixController(Config).createCommands()
  ```
 
-#### getConfig: ####
-returns the current config
+**getConfig:** returns the current config
  
  ```javascipt
     const HystrixController = require('hystrix-controller')
@@ -91,8 +89,7 @@ returns the current config
     }] -->
  ```
 
-#### getServiceCommands: ####
-returns hystrix serviceCommands to be used in your application 
+**getServiceCommands:** returns hystrix serviceCommands to be used in your application 
 
  ```javascipt
     const HystrixController = require('hystrix-controller')
@@ -105,8 +102,7 @@ returns hystrix serviceCommands to be used in your application
         })
  ```
 
-#### updateHystrix: ####
-Let the developer update the config and serviceCommands with a new config Array
+**updateHystrix:** Let the developer update the config and serviceCommands with a new config Array
 
  ```javascipt
     const HystrixController = require('hystrix-controller')
@@ -119,8 +115,7 @@ Let the developer update the config and serviceCommands with a new config Array
         })
  ```
 
-#### circuitHealth: ####
-Will return an Array of all your hystrix circuits and their health status. Either open or closed
+**circuitHealth:** Will return an Array of all your hystrix circuits and their health status. Either open or closed
 
  ```javascipt
     const HystrixController = require('hystrix-controller')
@@ -130,8 +125,7 @@ Will return an Array of all your hystrix circuits and their health status. Eithe
     <!-- [ { name: 'getUser', circuitStatus: 'closed' }, { name: 'getFriends', circuitStatus: 'opened' } ] -->
  ```
 
-#### getCircuitStatus: ####
-Will return status of passed in circuit "Name" status will be either open or closed
+**getCircuitStatus:** Will return status of passed in circuit "Name" status will be either open or closed
 
  ```javascipt
     const HystrixController = require('hystrix-controller')
@@ -141,8 +135,7 @@ Will return status of passed in circuit "Name" status will be either open or clo
     <!-- 'closed' -->
  ```
 
-#### resetCache: ####
-hystrixjs holds state and this makes it testing tricky. The resetCache method resets the state of the current taste of hystrix. ResetCache also can take one argument a string if the developer wants to clear the state for a specific factory "metrics, circuit, commandFactory". If the method is called with out an argument all three factories state will be reset.
+**resetCache:** hystrixjs holds state and this makes it testing tricky. The resetCache method resets the state of the current taste of hystrix. ResetCache also can take one argument a string if the developer wants to clear the state for a specific factory "metrics, circuit, commandFactory". If the method is called with out an argument all three factories state will be reset.
 
  ```javascipt
     const HystrixController = require('hystrix-controller')
@@ -157,8 +150,7 @@ hystrixjs holds state and this makes it testing tricky. The resetCache method re
  ```
 
 
-#### controller: ####
-Allows developer to open, close, or reset circuit or circuits. 
+**controller:** Allows developer to open, close, or reset circuit or circuits. 
 
 The controller method takes an Object as an argument with two nodes "services" which needs to be an array with the services the developer wishes to change the circuit status. This will be the name of service from the config the developer is using. "All" is also an option if the developer wishes to effect all circuits. 
 
