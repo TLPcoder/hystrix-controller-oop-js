@@ -73,3 +73,5 @@ circuitHealth: Will return an Array of all your hystrix circuits and their healt
 getCircuitStatus: Will return status of passed in circuit "Name" status will be either open or closed
 
 controller: Allows developer to open, close, or reset circuits or a circuit.
+
+TO BE CONTINUED
