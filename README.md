@@ -141,11 +141,11 @@ example:
  ```javascipt
     const HystrixController = require('hystrix-controller')
 
-    HystrixController.resetCache()
+    HystrixController().resetCache()
 
     <!-- resets state for all factories -->
 
-    HystrixController.resetCache('metrics')
+    HystrixController().resetCache('metrics')
 
     <!-- resets state for  metricsFactory: -->
  ```
