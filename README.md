@@ -1,7 +1,8 @@
-Hystrix Controller is a abstraction of hystrixjs to help developers a simpler Hystrix application
-These documents do not go over hystrixjs or how to create commands please find that information here https://www.npmjs.com/package/hystrixjs
+Markup :  # Hystrix Controller #
+This library an abstraction of hystrixjs to help give developers a simpler solution.
+This document does not go over hystrixjs or how to create commands please find that information here https://www.npmjs.com/package/hystrixjs
 
-To create hystrix wrappers
+Markup :  ## To create hystrix wrappers ##
 
 ```javascipt
     const setConfig = require('hystrix-controller');
@@ -9,6 +10,7 @@ To create hystrix wrappers
 
     setConfig(config).createWrappers();
 ```
+Markup :  ## Config ##
 
 Config must be an array of configurations for each hystrix wrapper
 example:
@@ -27,7 +29,7 @@ example:
         fallbackTo: hystrixFallbackFunc
     }]
 ```
-hystrix wrapper options:
+Markup :  ## hystrix wrapper options: ##
 
 •circuitBreakerSleepWindowInMilliseconds - how long the circuit breaker should stay opened, before allowing a single request to test the health of the service
 
@@ -56,8 +58,7 @@ timeout for request
 
 •fallbackTo - function, which will be executed if the request fails. The function will be called with the error as the 1st argument and an array of the original args as the 2nd argument
 
-
-Methods avaliable:
+Markup :  ## Methods avaliable: ##
 
 createWrappers: Creates and saves all your hystrix wrappers using the Config passed to HystrixController 
 
