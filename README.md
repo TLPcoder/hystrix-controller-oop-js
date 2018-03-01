@@ -2,13 +2,13 @@
 This library an abstraction of hystrixjs to help give developers a simpler solution.
 This document does not go over hystrixjs or how to create commands please find that information here https://www.npmjs.com/package/hystrixjs
 
-## To create hystrix wrappers ##
+## To create Hystrix Commands ##
 
 ```javascipt
     const setConfig = require('hystrix-controller');
     const config = require('../hystrix/hystrix-service-config')();
 
-    setConfig(config).createWrappers();
+    setConfig(config).createCommands();
 ```
 ## Config ##
 
@@ -60,7 +60,7 @@ timeout for request
 
 ## Methods avaliable: ##
 
-createWrappers: Creates and saves all your hystrix wrappers using the Config passed to HystrixController 
+createCommands: Creates and saves all your hystrix commands using the Config passed to HystrixController 
 
 getConfig: returns the current config
 

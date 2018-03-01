@@ -107,7 +107,7 @@ const newConfig = [{
 
 const hystrixTesting = new HystrixController(config)
 
-Promise.resolve(hystrixTesting.createWrappers())
+Promise.resolve(hystrixTesting.createCommands())
     .then(() => hystrixTesting.controller({services: ['testing1', 'testing2'], circuitStatus: 'open'}))
     .then((data) => console.log('databro:', data))
     .then(() => console.log(hystrixTesting.serviceCommands))
