@@ -1,6 +1,6 @@
 # Hystrix Controller #
-This library is an abstraction of hystrixjs to help give developers a simpler solution.
-This document does not go over hystrixjs or how to create commands please find that information here https://www.npmjs.com/package/hystrixjs. As I work on a way to improve the experiance for hystrix monitoring I have added a method "hystrixjs" which will return hystrix where the developer can access hystrixSSEStream to create monitoring.
+This library is an abstraction of hystrixjs to help give developers a simpler solution. 
+This document does not go over hystrixjs or how to create commands please find that information here https://www.npmjs.com/package/hystrixjs. As I work on a way to improve the experience for hystrix monitoring I have added a method "hystrixjs" which will return hystrix where the developer can access hystrixSSEStream to create monitoring.
 
 ## To create Hystrix Commands ##
 
@@ -31,28 +31,29 @@ example:
 ```
 ## hystrix command options: ##
 
-•circuitBreakerSleepWindowInMilliseconds - how long the circuit breaker should stay opened, before allowing a single request to test the health of the service
+• circuitBreakerSleepWindowInMilliseconds - How long the circuit breaker should stay opened, before allowing a single request to test the health of the service
 
-•errorHandler - function to validate if the error response from the service is an actual error. If this function returns an error object (default implementation), this request call will be marked as failure, which will influence the error percentage. If it returns null or false, the call will not be marked as failure. An example could be a 404 error, if the customer is not found.
+• errorHandler - Function to validate if the error response from the service is an actual error. If this function returns an error object (default implementation), this request call will be marked as failure, which will influence the error percentage. If it returns null or false, the call will not be marked as failure. An example could be a 404 error, if the customer is not found.
 
-•requestModel - The function that is called when you run the execution method on the hystrix command. Must return a promise.
-timeout for request
+• requestModel - The function that is called when the developer runs the execution method on the hystrix command. Must return a promise.
 
-•circuitBreakerRequestVolumeThreshold - minimum number of requests in a rolling window that needs to be exceeded, before the circuit breaker will bother at all to calculate the health
+•timeout: Timeout in milliseconds for request
 
-•circuitBreakerForceOpened - force this circuit breaker to be always opened
+• circuitBreakerRequestVolumeThreshold - minimum number of requests in a rolling window that needs to be exceeded, before the circuit breaker will bother at all to calculate the health
 
-•circuitBreakerForceClosed - force this circuit breaker to be always closed
+• circuitBreakerForceOpened - force this circuit breaker to be always opened
 
-•circuitBreakerErrorThresholdPercentage - error percentage threshold to trip the circuit
+• circuitBreakerForceClosed - force this circuit breaker to be always closed
 
-•statisticalWindowLength - length of the window to keep track of execution counts metrics (success, failure)
+• circuitBreakerErrorThresholdPercentage - error percentage threshold to trip the circuit
 
-•statisticalWindowNumberOfBuckets - number of buckets within the statistical window
+• statisticalWindowLength - length of the window to keep track of execution counts metrics (success, failure)
 
-•percentileWindowNumberOfBuckets - number of buckets within the percentile window
+• statisticalWindowNumberOfBuckets - number of buckets within the statistical window
 
-•percentileWindowLength - length of the window to keep track of execution times
+• percentileWindowNumberOfBuckets - number of buckets within the percentile window
+
+• percentileWindowLength - length of the window to keep track of execution times
 
 •requestVolumeRejectionThreshold - maximum number of concurrent requests, which can be executed. Defaults to 0, i.e. no limitation
 
@@ -60,7 +61,7 @@ timeout for request
 
 ## Methods avaliable: ##
 
-**createCommands:** Creates and saves all your hystrix commands using the Config passed to HystrixController
+**createCommands:** Creates and saves all hystrix commands using the Config passed to HystrixController
  ```javascipt
     const HystrixController = require('hystrix-controller')
     const Config = require('./hystrix-config')
@@ -89,7 +90,7 @@ timeout for request
     }] -->
  ```
 
-**getServiceCommands:** returns hystrix serviceCommands to be used in your application 
+**getServiceCommands:** returns hystrix serviceCommands to be used in the application 
 
  ```javascipt
     const HystrixController = require('hystrix-controller')
@@ -115,7 +116,7 @@ timeout for request
         })
  ```
 
-**circuitHealth:** Will return an Array of all your hystrix circuits and their health status. Either open or closed
+**circuitHealth:** Will return an Array of all hystrix circuits and their health status. Either open or closed
 
  ```javascipt
     const HystrixController = require('hystrix-controller')
