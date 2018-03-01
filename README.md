@@ -16,7 +16,7 @@ Config must be an array of configurations for each hystrix wrapper
 example:
 ```javascipt
     const config = [{
-        name: 'wapper',
+        name: 'command',
         requestModel: requestFunc,
         errorThreshold: 10,
         timeout: 10000,
