@@ -12,7 +12,7 @@ This document does not go over hystrixjs or how to create commands please find t
 ```
 ## Config ##
 
-Config must be an array of configurations for each hystrix wrapper
+Config must be an array of configurations for each hystrix command
 example:
 ```javascipt
     const config = [{
@@ -29,7 +29,7 @@ example:
         fallbackTo: hystrixFallbackFunc
     }]
 ```
-## hystrix wrapper options: ##
+## hystrix command options: ##
 
 •circuitBreakerSleepWindowInMilliseconds - how long the circuit breaker should stay opened, before allowing a single request to test the health of the service
 
