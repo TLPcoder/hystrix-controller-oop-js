@@ -24,7 +24,6 @@ example:
         sleepWindowInMilliseconds: 1000,
         statisticalWindowLength: 10000,
         statisticalWindowNumberOfBuckets: 10000,
-        checkServiceHealthTime: 1000,
         errorHandler: errorHandlerFunc,
         fallbackTo: hystrixFallbackFunc
     }]
@@ -45,7 +44,7 @@ example:
 
 • forceClosed - force this circuit breaker to be always closed
 
-• circuitBreakerErrorThresholdPercentage - error percentage threshold to trip the circuit
+• errorThreshold - error percentage threshold to trip the circuit
 
 • statisticalWindowLength - length of the window to keep track of execution counts metrics (success, failure)
 
@@ -84,7 +83,6 @@ example:
         sleepWindowInMilliseconds: 1000,
         statisticalWindowLength: 10000,
         statisticalWindowNumberOfBuckets: 10000,
-        checkServiceHealthTime: 1000,
         errorHandler: errorHandlerFunc,
         fallbackTo: hystrixFallbackFunc
     }] -->
