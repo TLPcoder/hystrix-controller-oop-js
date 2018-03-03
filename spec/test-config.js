@@ -11,7 +11,7 @@ exports.config = [{
     sleepWindowInMilliseconds: 1000,
     statisticalWindowLength: 10000,
     statisticalWindowNumberOfBuckets: 10000,
-    errorHandler: () => console.log('error handler'),
+    errorHandler: (err) => err,
     fallbackTo: function(err, args){return {error: err.message, service: 'testing'} }
 }, {
     name: 'testing1',
@@ -22,7 +22,7 @@ exports.config = [{
     sleepWindowInMilliseconds: 1000,
     statisticalWindowLength: 10000,
     statisticalWindowNumberOfBuckets: 10000,
-    errorHandler: () => console.log('error handler'),
+    errorHandler: (err) => err,
     fallbackTo: function(err, args){return {error: err.message, service: 'testing1'} }
 }, {
     name: 'testing2',
@@ -33,7 +33,7 @@ exports.config = [{
     sleepWindowInMilliseconds: 1000,
     statisticalWindowLength: 10000,
     statisticalWindowNumberOfBuckets: 10000,
-    errorHandler: () => console.log('error handler'),
+    errorHandler: (err) => err,
     fallbackTo: function(err, args){return {error: err.message, service: 'testing2'} }
 }, {
     name: 'testing3',
@@ -44,7 +44,7 @@ exports.config = [{
     sleepWindowInMilliseconds: 1000,
     statisticalWindowLength: 10000,
     statisticalWindowNumberOfBuckets: 10000,
-    errorHandler: () => console.log('error handler'),
+    errorHandler: (err) => err,
     fallbackTo: function(err, args){return {error: err.message, service: 'testing3'} }
 }]
 
@@ -57,7 +57,7 @@ exports.newConfig = [{
     sleepWindowInMilliseconds: 1000,
     statisticalWindowLength: 10000,
     statisticalWindowNumberOfBuckets: 10000,
-    errorHandler: () => console.log('error handler'),
+    errorHandler: (err) => err,
     fallbackTo: function(err, args){return {error: err.message, service: 'testing4'} }
 }, {
     name: 'testing5',
@@ -68,7 +68,7 @@ exports.newConfig = [{
     sleepWindowInMilliseconds: 1000,
     statisticalWindowLength: 10000,
     statisticalWindowNumberOfBuckets: 10000,
-    errorHandler: () => console.log('error handler'),
+    errorHandler: (err) => err,
     fallbackTo: function(err, args){return {error: err.message, service: 'testing5'} }
 }, {
     name: 'testing6',
@@ -79,7 +79,7 @@ exports.newConfig = [{
     sleepWindowInMilliseconds: 1000,
     statisticalWindowLength: 10000,
     statisticalWindowNumberOfBuckets: 10000,
-    errorHandler: () => console.log('error handler'),
+    errorHandler: (err) => err,
     fallbackTo: function(err, args){return {error: err.message, service: 'testing6'} }
 }, {
     name: 'testing7',
@@ -90,6 +90,6 @@ exports.newConfig = [{
     sleepWindowInMilliseconds: 1000,
     statisticalWindowLength: 10000,
     statisticalWindowNumberOfBuckets: 10000,
-    errorHandler: () => console.log('error handler'),
+    errorHandler: (err) => err,
     fallbackTo: function(err, args){return {error: err.message, service: 'testing7'} }
 }]

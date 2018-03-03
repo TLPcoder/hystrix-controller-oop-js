@@ -60,7 +60,7 @@ example:
 
 ## Methods avaliable: ##
 
-**createCommands:** Creates and saves all hystrix commands using the Config passed to HystrixController
+**createCommands:** Creates and saves all hystrix commands using the Config passed to HystrixController. This will also run the createCommands method.
  ```javascipt
     const HystrixController = require('hystrix-controller')
     const Config = require('./hystrix-config')
@@ -112,6 +112,16 @@ example:
         .then((user) => {
             return user
         })
+ ```
+
+ **addCommand:** Lets the developer add a command to their hystix commands. The method takes a normal hystrix config object as an argument.
+
+ ```javascipt
+    const HystrixController = require('hystrix-controller')
+
+    const newCommand = {...}
+    
+    HystrixController().addCommand(newCommand)
  ```
 
 **circuitHealth:** Will return an Array of all hystrix circuits and their health status. Either open or closed
