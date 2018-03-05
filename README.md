@@ -68,7 +68,7 @@ example:
     HystrixController(Config).createCommands()
  ```
 
-**getConfig:** returns the current config
+**getConfig:** returns the current config.
  
  ```javascipt
     const HystrixController = require('hystrix-controller')
@@ -88,7 +88,7 @@ example:
     }] -->
  ```
 
-**getServiceCommands:** returns hystrix serviceCommands to be used in the application 
+**getServiceCommands:** returns hystrix serviceCommands to be used in the application.
 
  ```javascipt
     const HystrixController = require('hystrix-controller')
@@ -101,7 +101,7 @@ example:
         })
  ```
 
-**updateHystrix:** Let the developer update the config and serviceCommands with a new config Array
+**updateHystrix:** Let the developer update the config and serviceCommands with a new config Array.
 
  ```javascipt
     const HystrixController = require('hystrix-controller')
@@ -114,7 +114,7 @@ example:
         })
  ```
 
- **addCommand:** Lets the developer add a command to their hystix commands. The method takes a normal hystrix config object as an argument.
+ **addCommand:** Lets the developer add a command to their hystix. The method takes a normal hystrix config object as an argument. Will add the new command to the hystrix-contoller state and serviceCommands.
 
  ```javascipt
     const HystrixController = require('hystrix-controller')
@@ -124,7 +124,7 @@ example:
     HystrixController().addCommand(newCommand)
  ```
 
-**circuitHealth:** Will return an Array of all hystrix circuits and their health status. Either open or closed
+**circuitHealth:** Will return an Array of all hystrix circuits and their health status. Either open or closed.
 
  ```javascipt
     const HystrixController = require('hystrix-controller')
@@ -134,7 +134,7 @@ example:
     <!-- [ { name: 'getUser', circuitStatus: 'closed' }, { name: 'getFriends', circuitStatus: 'opened' } ] -->
  ```
 
-**getCircuitStatus:** Will return status of passed in circuit "Name" status will be either open or closed
+**getCircuitStatus:** Will return status of passed in circuit "Name" status will be either open or closed.
 
  ```javascipt
     const HystrixController = require('hystrix-controller')
@@ -144,7 +144,7 @@ example:
     <!-- 'closed' -->
  ```
 
-**resetCache:** hystrixjs holds state and this makes it testing tricky. The resetCache method resets the state of the current taste of hystrix. ResetCache also can take one argument a string if the developer wants to clear the state for a specific factory "metrics, circuit, commandFactory". If the method is called with out an argument all three factories state will be reset.
+**resetCache:** hystrixjs holds state and this makes it testing tricky. The resetCache method resets the state of the current taste of hystrix. ResetCache also can take one argument a string if the developer wants to clear the state for a specific factory "metrics, circuit, command". If the method is called with out an argument all three factories state will be reset.
 
  ```javascipt
     const HystrixController = require('hystrix-controller')
