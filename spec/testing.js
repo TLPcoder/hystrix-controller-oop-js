@@ -82,7 +82,10 @@ describe('Hystrix Constroller', function () {
                 statisticalWindowLength: 10000,
                 statisticalWindowNumberOfBuckets: 10000,
                 errorHandler: (err) => err,
-                fallbackTo: (err, args) => { err, args }
+                fallbackTo: (err, args) => {
+                    err,
+                    args
+                }
             }
             HystrixController().addCommand(command)
             const newCommand = HystrixController().getServiceCommands().addCommand;
@@ -90,6 +93,8 @@ describe('Hystrix Constroller', function () {
             chai.expect(newCommand.timeout).to.equal(12345)
             chai.expect(newCommand.circuitConfig.circuitBreakerForceClosed).to.equal(false)
             chai.expect(newCommand.circuitConfig.circuitBreakerForceOpened).to.equal(false)
+            chai.expect(HystrixController().hystrixConfig[HystrixController().hystrixConfig.length-1].name).to.equal('addCommand')
+            chai.expect(HystrixController().structuredConfig.addCommand.name).to.equal('addCommand')
         })
     })
 
@@ -318,6 +323,37 @@ describe('Hystrix Constroller', function () {
                 chai.expect(HystrixController().getCircuitBreaker(service).circuitBreakerForceClosed).to.equal(false)
                 chai.expect(HystrixController().getCircuitBreaker(service).circuitBreakerForceOpened).to.equal(false)
             })
+        })
+    })
+    describe('testing commands', function () {
+        beforeEach(function () {
+            HystrixController().controller({
+                services: ['all'],
+                circuitStatus: 'reset'
+            })
+        })
+
+        it('circuit closed', function (done) {
+            const { testing } = HystrixController().getServiceCommands()
+            testing.execute('testing command closed circuit')
+            .then(str => {
+                chai.expect(str).to.equal('testing command closed circuit')
+            })
+            .then(done, done)
+        })
+
+        it('circuit opened', function (done) {
+            const { testing } = HystrixController().getServiceCommands()
+            HystrixController().controller({
+                services: 'testing',
+                circuitStatus: 'open'
+            })
+            testing.execute('testing command closed circuit')
+            .then(str => {})
+            .then(done, (err) => {
+                chai.expect(err.debug.error).to.equal('OpenCircuitError')
+            })
+            .then(done, done)
         })
     })
 })
