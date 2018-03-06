@@ -126,16 +126,40 @@ describe('Hystrix Constroller', function () {
             const circuitHealth = HystrixController().circuitHealth()
             chai.expect(circuitHealth).to.deep.equal([{
                 'circuitStatus': 'closed',
-                'name': 'testing'
+                'name': 'testing',
+                'metrics': {
+                    'errorCount': 0,
+                    'errorPercentage': 0,
+                    'successCount': 0,
+                    'totalCount': 0
+                }
             }, {
                 'circuitStatus': 'closed',
-                'name': 'testing1'
+                'name': 'testing1',
+                'metrics': {
+                    'errorCount': 0,
+                    'errorPercentage': 0,
+                    'successCount': 0,
+                    'totalCount': 0
+                }
             }, {
                 'circuitStatus': 'closed',
-                'name': 'testing2'
+                'name': 'testing2',
+                'metrics': {
+                    'errorCount': 0,
+                    'errorPercentage': 0,
+                    'successCount': 0,
+                    'totalCount': 0
+                }
             }, {
                 'circuitStatus': 'closed',
-                'name': 'testing3'
+                'name': 'testing3',
+                'metrics': {
+                    'errorCount': 0,
+                    'errorPercentage': 0,
+                    'successCount': 0,
+                    'totalCount': 0
+                }
             }])
         })
     })
