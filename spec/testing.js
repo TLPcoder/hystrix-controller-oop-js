@@ -82,10 +82,7 @@ describe('Hystrix Constroller', function () {
                 statisticalWindowLength: 10000,
                 statisticalWindowNumberOfBuckets: 10000,
                 errorHandler: (err) => err,
-                fallbackTo: (err, args) => {
-                    err,
-                    args
-                }
+                fallbackTo: (err, args) => { err, args }
             }
             HystrixController().addCommand(command)
             const newCommand = HystrixController().getServiceCommands().addCommand;
@@ -114,6 +111,13 @@ describe('Hystrix Constroller', function () {
 
     describe('circuits methods', function () {
 
+        after(function() {
+            HystrixController().controller({
+                services: ['all'],
+                circuitStatus: 'reset'
+            })
+        })
+
         it('fn getCircuitStatus', function () {
             const statusCheck = HystrixController()
             chai.expect(statusCheck.getCircuitStatus('testing')).to.equal('closed')
@@ -122,45 +126,44 @@ describe('Hystrix Constroller', function () {
             chai.expect(statusCheck.getCircuitStatus('testing3')).to.equal('closed')
         })
 
-        it('fn circuitHealth', function () {
-            const circuitHealth = HystrixController().circuitHealth()
-            chai.expect(circuitHealth).to.deep.equal([{
-                'circuitStatus': 'closed',
-                'name': 'testing',
-                'metrics': {
-                    'errorCount': 0,
-                    'errorPercentage': 0,
-                    'successCount': 0,
-                    'totalCount': 0
+        it('fn circuitHealth', function (done) {
+            const { testing } = HystrixController().getServiceCommands()
+            var arr = []
+            for(var i = 0; i < 20; i++){
+                arr.push(testing.execute('success'))
+            }
+            Promise.all(arr).then(data => {
+                const circuitHealth = HystrixController().circuitHealth('testing')
+                chai.expect(circuitHealth).to.deep.equal([{
+                    'circuitStatus': 'closed',
+                    'name': 'testing',
+                    'metrics': {
+                        'errorCount': 0,
+                        'errorPercentage': 0,
+                        'successCount': 20,
+                        'totalCount': 20
+                    }
+                }])
+            }).then(() => {
+                var arr = []
+                for(var i = 0; i < 5; i++){
+                    arr.push(testing.execute('err'))
                 }
-            }, {
-                'circuitStatus': 'closed',
-                'name': 'testing1',
-                'metrics': {
-                    'errorCount': 0,
-                    'errorPercentage': 0,
-                    'successCount': 0,
-                    'totalCount': 0
-                }
-            }, {
-                'circuitStatus': 'closed',
-                'name': 'testing2',
-                'metrics': {
-                    'errorCount': 0,
-                    'errorPercentage': 0,
-                    'successCount': 0,
-                    'totalCount': 0
-                }
-            }, {
-                'circuitStatus': 'closed',
-                'name': 'testing3',
-                'metrics': {
-                    'errorCount': 0,
-                    'errorPercentage': 0,
-                    'successCount': 0,
-                    'totalCount': 0
-                }
-            }])
+                Promise.all(arr).then(() => {})
+                .then(done, () => {
+                    const circuitHealth = HystrixController().circuitHealth('testing')
+                    chai.expect(circuitHealth).to.deep.equal([{
+                        'circuitStatus': 'opened',
+                        'name': 'testing',
+                        'metrics': {
+                            'errorCount': 5,
+                            'errorPercentage': 20,
+                            'successCount': 20,
+                            'totalCount': 25
+                        }
+                    }])
+                }).then(done, done)
+            })
         })
     })
 
@@ -229,7 +232,6 @@ describe('Hystrix Constroller', function () {
                 circuitStatus: 'reset'
             })
         })
-
         it('open one circuit', function () {
             HystrixController().controller({
                 services: ['testing'],
@@ -356,7 +358,45 @@ describe('Hystrix Constroller', function () {
                 circuitStatus: 'reset'
             })
         })
-
+        it('trigger open circuit', function (done) {
+            const { testing } = HystrixController().getServiceCommands()
+            var arr = []
+            for(var i = 0; i < 10; i++){
+                arr.push(testing.execute('success'))
+            }
+            Promise.all(arr).then(data => {
+                const circuitHealth = HystrixController().circuitHealth('testing')
+                chai.expect(circuitHealth).to.deep.equal([{
+                    'circuitStatus': 'closed',
+                    'name': 'testing',
+                    'metrics': {
+                        'errorCount': 0,
+                        'errorPercentage': 0,
+                        'successCount': 10,
+                        'totalCount': 10
+                    }
+                }])
+            }).then(() => {
+                var arr = []
+                for(var i = 0; i < 2; i++){
+                    arr.push(testing.execute('err'))
+                }
+                Promise.all(arr).then(() => {})
+                .then(done, () => {
+                    const circuitHealth = HystrixController().circuitHealth('testing')
+                    chai.expect(circuitHealth).to.deep.equal([{
+                        'circuitStatus': 'opened',
+                        'name': 'testing',
+                        'metrics': {
+                            'errorCount': 2,
+                            'errorPercentage': 16,
+                            'successCount': 10,
+                            'totalCount': 12
+                        }
+                    }])
+                }).then(done, done)
+            })
+        })
         it('circuit closed', function (done) {
             const { testing } = HystrixController().getServiceCommands()
             testing.execute('testing command closed circuit')
@@ -378,6 +418,28 @@ describe('Hystrix Constroller', function () {
                 chai.expect(err.debug.error).to.equal('OpenCircuitError')
             })
             .then(done, done)
+        })
+        
+        it('open circuit reset circuit', function (done) {
+            const { testing } = HystrixController().getServiceCommands()
+            HystrixController().controller({
+                services: 'testing',
+                circuitStatus: 'open'
+            })
+            testing.execute('testing command closed circuit')
+            .then(str => {})
+            .then(done, (err) => {
+                chai.expect(err.debug.error).to.equal('OpenCircuitError')
+            })
+            .then(() => {
+                HystrixController().controller({
+                    services: 'testing',
+                    circuitStatus: 'reset'
+                })
+                return testing.execute('testing command closed circuit')
+            }).then(str => {
+                chai.expect(str).to.equal('testing command closed circuit')
+            }).then(done, done)
         })
     })
 })

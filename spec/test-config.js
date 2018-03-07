@@ -4,7 +4,13 @@ var exports = module.exports = {};
 
 exports.config = [{
     name: 'testing',
-    requestModel: (arg) => Promise.resolve(arg),
+    requestModel: (arg) => {
+        if(arg === 'err'){
+            return Promise.reject('err')
+        } else {
+            return Promise.resolve(arg)
+        }
+    },
     errorThreshold: 10,
     timeout: 10000,
     requestVolumeThreshold: 10,
@@ -19,7 +25,13 @@ exports.config = [{
     }
 }, {
     name: 'testing1',
-    requestModel: (arg) => Promise.resolve(arg),
+    requestModel: (arg) => {
+        if(arg === 'err'){
+            return Promise.reject('err')
+        } else {
+            return Promise.resolve(arg)
+        }
+    },
     errorThreshold: 10,
     timeout: 10000,
     requestVolumeThreshold: 10,
@@ -34,7 +46,13 @@ exports.config = [{
     }
 }, {
     name: 'testing2',
-    requestModel: (arg) => Promise.resolve(arg),
+    requestModel: (arg) => {
+        if(arg === 'err'){
+            return Promise.reject('err')
+        } else {
+            return Promise.resolve(arg)
+        }
+    },
     errorThreshold: 10,
     timeout: 10000,
     requestVolumeThreshold: 10,
@@ -49,7 +67,13 @@ exports.config = [{
     }
 }, {
     name: 'testing3',
-    requestModel: (arg) => Promise.resolve(arg),
+    requestModel: (arg) => {
+        if(arg === 'err'){
+            return Promise.reject('err')
+        } else {
+            return Promise.resolve(arg)
+        }
+    },
     errorThreshold: 10,
     timeout: 10000,
     requestVolumeThreshold: 10,
@@ -66,7 +90,13 @@ exports.config = [{
 
 exports.newConfig = [{
     name: 'testing4',
-    requestModel: (arg) => Promise.resolve(arg),
+    requestModel: (arg) => {
+        if(arg === 'err'){
+            return Promise.reject('err')
+        } else {
+            return Promise.resolve(arg)
+        }
+    },
     errorThreshold: 10,
     timeout: 10000,
     requestVolumeThreshold: 10,
@@ -81,7 +111,13 @@ exports.newConfig = [{
     }
 }, {
     name: 'testing5',
-    requestModel: (arg) => Promise.resolve(arg),
+    requestModel: (arg) => {
+        if(arg === 'err'){
+            return Promise.reject('err')
+        } else {
+            return Promise.resolve(arg)
+        }
+    },
     errorThreshold: 10,
     timeout: 10000,
     requestVolumeThreshold: 10,
@@ -96,7 +132,13 @@ exports.newConfig = [{
     }
 }, {
     name: 'testing6',
-    requestModel: (arg) => Promise.resolve(arg),
+    requestModel: (arg) => {
+        if(arg === 'err'){
+            return Promise.reject('err')
+        } else {
+            return Promise.resolve(arg)
+        }
+    },
     errorThreshold: 10,
     timeout: 10000,
     requestVolumeThreshold: 10,
@@ -111,7 +153,13 @@ exports.newConfig = [{
     }
 }, {
     name: 'testing7',
-    requestModel: (arg) => Promise.resolve(arg),
+    requestModel: (arg) => {
+        if(arg === 'err'){
+            return Promise.reject('err')
+        } else {
+            return Promise.resolve(arg)
+        }
+    },
     errorThreshold: 10,
     timeout: 10000,
     requestVolumeThreshold: 10,

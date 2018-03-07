@@ -1,6 +1,6 @@
 {
   "name": "hystrix-controller",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "library built on top of the hystrixjs library",
   "main": "index.js",
   "keywords": [
