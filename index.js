@@ -4,11 +4,6 @@ const CircuitController = require('./lib/circuit-controller')
 class HystrixController extends CircuitController{
     constructor(config){
         super(config)
-        setInterval(() => {
-            this.hystrixConfig.forEach(circuitConfig => {
-                this.updateOrCreateMetrics(circuitConfig.name)
-            }
-        )}, 2000)
     }
 }
 
