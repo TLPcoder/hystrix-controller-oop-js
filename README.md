@@ -1,9 +1,9 @@
 # Hystrix Controller #
-This library adds to the functionality of hystrixjs to help give developers a simpler solution and more functionality then the original library provides. Such as command managament (create, add, update, reset), command getter, circuit health checks, circuit metrics, and a controller allowing for opening and closing of circuits. All the developer needs to do is create a config.
+This library adds to the functionality of hystrixjs to help give developers a simpler solution and more functionality then the library provides by itself. Such as command managament (create, add, update, reset), command getters, circuit health checks, circuit metrics, and a controller allowing for opening and closing of circuits. All the developer needs to do is create a config.
 
-This document does a good job covering everything you need to create an application using hystrix but I recommended reading the documentation for hystrixjs to gain further knowledge. Please find that information here https://www.npmjs.com/package/hystrixjs.
+This documentation does a good job covering everything you need to create an application using hystrix but I recommended reading the documentation for hystrixjs to gain further knowledge. Please find that information here https://www.npmjs.com/package/hystrixjs.
 
-As I work on a way to improve the experience for hystrix monitoring I have added a method "hystrixjs" which will return hystrix where the developer can access hystrixSSEStream to create monitoring.
+For hystrix monitoring I have added a method "hystrixjs" which will return the hystrix instance where the developer can access hystrixSSEStream to create monitoring.
 
 ## To create Hystrix Commands ##
 
@@ -123,7 +123,7 @@ example:
     HystrixController().addCommand(newCommand)
  ```
 
-**circuitHealth:** Will return an Array of all hystrix circuits, their metrics, and circuit-status ("open or closed"). Can also pass an argument to the circuitHealth method ("name of command") to return the health of its specific  circuit health.
+**circuitHealth:** Will return an Array of all hystrix circuits, their metrics, and circuit-status ("opened or closed"). Can also pass an argument to the circuitHealth method ("name of command") to return the health of its specific  circuit health.
 
  ```javascipt
     const HystrixController = require('hystrix-controller')
@@ -162,7 +162,7 @@ example:
     <!-- 'closed' -->
  ```
 
-**resetCache:** hystrixjs holds state and this makes it testing tricky. The resetCache method resets the current state of hystrix. ResetCache also can take one argument a string if the developer wants to clear the state for a specific factory "metrics, circuit, command". If the method is called without an argument all three factories state will be reset.
+**resetCache:** hystrixjs holds state and this can make testing tricky depending on the test cases. The resetCache method resets the current state of hystrix. ResetCache also can take one argument a string if the developer wants to clear the state for a specific factory "metrics, circuit, command". If the method is called without an argument all three factories state will be reset.
 
  ```javascipt
     const HystrixController = require('hystrix-controller')
