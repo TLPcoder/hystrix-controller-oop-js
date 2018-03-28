@@ -1,11 +1,14 @@
 {
   "name": "hystrix-controller",
-  "version": "1.0.14",
-  "description": "library built on top of the hystrixjs library",
+  "version": "1.0.15",
+  "description": "Simplify your hystrixjs architecture, open and close circuits for testing, check circuit health, and more.",
   "main": "index.js",
   "keywords": [
     "Hystrix",
-    "Hystrixjs"
+    "Hystrixjs",
+    "circuit breaker",
+    "fault tolerance",
+    "latency" 
   ],
   "scripts": {
     "test": "mocha spec/testing.js"
